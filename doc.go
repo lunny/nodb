@@ -6,22 +6,22 @@
 //
 // Usage
 //
-// First create a ledis instance before use:
+// First create a nodb instance before use:
 //
 //  l := nodb.Open(cfg)
 //
-// cfg is a Config instance which contains configuration for ledis use,
-// like DataDir (root directory for ledis working to store data).
+// cfg is a Config instance which contains configuration for nodb use,
+// like DataDir (root directory for nodb working to store data).
 //
-// After you create a ledis instance, you can select a DB to store you data:
+// After you create a nodb instance, you can select a DB to store you data:
 //
 //  db, _ := l.Select(0)
 //
-// DB must be selected by a index, ledis supports only 16 databases, so the index range is [0-15].
+// DB must be selected by a index, nodb supports only 16 databases, so the index range is [0-15].
 //
 // KV
 //
-// KV is the most basic ledis type like any other key-value database.
+// KV is the most basic nodb type like any other key-value database.
 //
 //  err := db.Set(key, value)
 //  value, err := db.Get(key)
@@ -56,6 +56,6 @@
 //
 // Binlog
 //
-// ledis supports binlog, so you can sync binlog to another server for replication. If you want to open binlog support, set UseBinLog to true in config.
+// nodb supports binlog, so you can sync binlog to another server for replication. If you want to open binlog support, set UseBinLog to true in config.
 //
 package nodb
