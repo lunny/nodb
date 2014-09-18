@@ -1,5 +1,7 @@
 # NoDB
 
+[中文](https://github.com/lunny/nodb/blob/master/README_CN.md)
+
 Nodb is a fork of [ledisdb](https://github.com/siddontang/ledisdb) and shrink version. It's get rid of all C or other language codes and only keep Go's. It aims to provide a nosql database library rather than a redis like server. So if you want a redis like server, ledisdb is the best choose.
 
 Nodb is a pure Go and high performance NoSQL database library. It supports some data structure like kv, list, hash, zset, bitmap, set.
