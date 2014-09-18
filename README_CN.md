@@ -20,15 +20,46 @@ Nodb 当前底层使用 goleveldb 来存储数据。
     go get github.com/lunny/nodb
 
 ## 例子
+
+### 打开和选择数据库
     
     import "github.com/lunny/nodb"
 
     l, _ := nodb.Open(cfg)
     db, _ := l.Select(0)
 
-    db.Set(key, value)
+### KV
 
-    db.Get(key)
+KV 是最基础的功能，和其它Nosql一样。
+
+	err := db.Set(key, value)
+	value, err := db.Get(key)
+
+### List
+
+List 是一些值的简单列表，按照插入的顺序排列。你可以从左或右push和pop值。
+
+	err := db.LPush(key, value1)
+	err := db.RPush(key, value2)
+	value1, err := db.LPop(key)
+	value2, err := db.RPop(key)
+
+### Hash
+
+Hash 是一个field和value对应的map。
+
+    n, err := db.HSet(key, field1, value1)
+    n, err := db.HSet(key, field2, value2)
+    value1, err := db.HGet(key, field1)
+    value2, err := db.HGet(key, field2)
+
+### ZSet
+
+ZSet 是一个排序的值集合。zset的每个成员对应一个score，这是一个int64的值用于从小到大排序。成员不可重复，但是score可以相同。
+
+    n, err := db.ZAdd(key, ScorePair{score1, member1}, ScorePair{score2, member2})
+    ay, err := db.ZRangeByScore(key, minScore, maxScore, 0, -1)
+
 
 ## 链接
 
