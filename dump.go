@@ -7,7 +7,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/siddontang/go-snappy/snappy"
+	"code.google.com/p/snappy-go/snappy"
 )
 
 //dump format
