@@ -320,7 +320,9 @@ func (db *DB) LPop(key []byte) ([]byte, error) {
 }
 
 func (db *DB) LPush(key []byte, arg1 []byte, args ...[]byte) (int64, error) {
-	return db.lpush(key, listHeadSeq, arg1, args...)
+	var argss = [][]byte{arg1}
+	argss = append(argss, args...)
+	return db.lpush(key, listHeadSeq, argss...)
 }
 
 func (db *DB) LRange(key []byte, start int32, stop int32) ([][]byte, error) {
@@ -386,7 +388,9 @@ func (db *DB) RPop(key []byte) ([]byte, error) {
 }
 
 func (db *DB) RPush(key []byte, arg1 []byte, args ...[]byte) (int64, error) {
-	return db.lpush(key, listTailSeq, arg1, args...)
+	var argss = [][]byte{arg1}
+	argss = append(argss, args...)
+	return db.lpush(key, listTailSeq, argss...)
 }
 
 func (db *DB) LClear(key []byte) (int64, error) {
