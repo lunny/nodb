@@ -12,7 +12,6 @@ Nodb now use goleveldb as backend to store data.
 
 + Rich data structure: KV, List, Hash, ZSet, Bitmap, Set.
 + Stores lots of data, over the memory limit. 
-+ Supports lua scripting.
 + Supports expiration and ttl.
 + Easy to embed in your own Go application.
 
