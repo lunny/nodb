@@ -53,7 +53,7 @@ func listAdaptor(db *DB) *adaptor {
 			eles = append(eles, e)
 		}
 
-		if n, err := db.LPush(k, eles...); err != nil {
+		if n, err := db.LPush(k, eles[0], eles[1:]...); err != nil {
 			return 0, err
 		} else {
 			return n, nil
