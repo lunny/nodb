@@ -109,7 +109,8 @@ func newOptions(cfg *config.LevelDBConfig) *opt.Options {
 
 	cfg.Adjust()
 
-	opts.BlockCache = cache.NewLRUCache(cfg.CacheSize)
+	//opts.BlockCacher = cache.NewLRU(cfg.CacheSize)
+	opts.BlockCacheCapacity = cfg.CacheSize
 
 	//we must use bloomfilter
 	opts.Filter = filter.NewBloomFilter(defaultFilterBits)
