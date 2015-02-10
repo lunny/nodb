@@ -92,3 +92,7 @@ const (
 	DBInTransaction uint8 = 0x1
 	DBInMulti       uint8 = 0x2
 )
+
+var (
+	Version = "0.1"
+)
