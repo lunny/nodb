@@ -22,6 +22,7 @@ Nodb now use goleveldb as backend to store data.
 ## Package Example
 
 ### Open And Select database
+
 	import(
 	"github.com/lunny/nodb"
 	"github.com/lunny/nodb/config"
