@@ -23,10 +23,19 @@ Nodb 当前底层使用 goleveldb 来存储数据。
 
 ### 打开和选择数据库
     
-    import "github.com/lunny/nodb"
+	import(
+	"github.com/lunny/nodb"
+	"github.com/lunny/nodb/config"
+	)
+    
+	cfg := new(config.Config)
+	cfg.DataDir = "./"
+	dbs, err := nodb.Open(cfg)
+	if err != nil {
+		fmt.Printf("nodb: error opening db: %v", err)
+	}
 
-    l, _ := nodb.Open(cfg)
-    db, _ := l.Select(0)
+	db, _ := dbs.Select(0)
 
 ### KV
 
