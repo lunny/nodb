@@ -22,11 +22,20 @@ Nodb now use goleveldb as backend to store data.
 ## Package Example
 
 ### Open And Select database
-    
-    import "github.com/lunny/nodb"
 
-    l, _ := nodb.Open(cfg)
-    db, _ := l.Select(0)
+	import(
+	"github.com/lunny/nodb"
+	"github.com/lunny/nodb/config"
+	)
+    
+	cfg := new(config.Config)
+	cfg.DataDir = "./"
+	dbs, err := nodb.Open(cfg)
+	if err != nil {
+		fmt.Printf("nodb: error opening db: %v", err)
+	}
+
+	db, _ := dbs.Select(0)
 
 ### KV
 
