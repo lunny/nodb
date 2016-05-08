@@ -4,10 +4,48 @@ import (
 	"bytes"
 	"errors"
 	"regexp"
+
+	"github.com/lunny/nodb/store"
 )
 
 var errDataType = errors.New("error data type")
 var errMetaKey = errors.New("error meta key")
+
+// Seek search the prefix key
+func (db *DB) Seek(key []byte) (*store.Iterator, error) {
+	return db.seek(KVType, key)
+}
+
+func (db *DB) seek(dataType byte, key []byte) (*store.Iterator, error) {
+	var minKey []byte
+	var err error
+
+	if len(key) > 0 {
+		if err = checkKeySize(key); err != nil {
+			return nil, err
+		}
+		if minKey, err = db.encodeMetaKey(dataType, key); err != nil {
+			return nil, err
+		}
+
+	} else {
+		if minKey, err = db.encodeMinKey(dataType); err != nil {
+			return nil, err
+		}
+	}
+
+	it := db.bucket.NewIterator()
+	it.Seek(minKey)
+	return it, nil
+}
+
+func (db *DB) MaxKey() ([]byte, error) {
+	return db.encodeMaxKey(KVType)
+}
+
+func (db *DB) Key(it *store.Iterator) ([]byte, error) {
+	return db.decodeMetaKey(KVType, it.Key())
+}
 
 func (db *DB) scan(dataType byte, key []byte, count int, inclusive bool, match string) ([][]byte, error) {
 	var minKey, maxKey []byte
