@@ -357,3 +357,31 @@ func (db *DB) Persist(key []byte) (int64, error) {
 	err = t.Commit()
 	return n, err
 }
+
+func (db *DB) Lock() {
+	t := db.kvBatch
+	t.Lock()
+}
+
+func (db *DB) Remove(key []byte) bool {
+	if len(key) == 0 {
+		return false
+	}
+	t := db.kvBatch
+	t.Delete(db.encodeKVKey(key))
+	_, err := db.rmExpire(t, KVType, key)
+	if err != nil {
+		return false
+	}
+	return true
+}
+
+func (db *DB) Commit() error {
+	t := db.kvBatch
+	return t.Commit()
+}
+
+func (db *DB) Unlock() {
+	t := db.kvBatch
+	t.Unlock()
+}
